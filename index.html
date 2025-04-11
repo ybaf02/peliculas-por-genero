@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Películas por Género</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .contenedor {
+      background-color: rgba(0, 0, 0, 0.8);
+      min-height: 100vh;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #111;
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    main {
+      flex: 1;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .peliculas {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .pelicula {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 15px 20px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .pelicula a {
+      color: #00aced;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .pelicula a:hover {
+      text-decoration: underline;
+    }
+
+    .video-link {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #00aced;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .video-link:hover {
+      background-color: #0084a4;
+    }
+
+    footer {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <header>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" alt="Logo del sitio">
+    </header>
+
+    <main>
+      <h2>Elige un género de película</h2>
+      <select id="genero" onchange="mostrarPeliculas()">
+        <option value="">-- Selecciona un género --</option>
+        <option value="drama">Drama</option>
+        <option value="accion">Acción</option>
+        <option value="comedia">Comedia</option>
+      </select>
+
+      <div class="peliculas" id="listaPeliculas"></div>
+
+      <a class="video-link" href="https://www.youtube.com/watch?v=tuU5CyjYN6Q" target="_blank">
+        Ver Película Destacada en Streaming
+      </a>
+    </main>
+
+    <footer>
+      <p>
+        Curso: Conceptualización de servicios en la nube<br>
+        Nombre: Maria Fabiola Elizondo Lepe<br>
+        Código: 223372207<br>
+        Correo: fabyely02z@gmail.com
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    const peliculas = {
+      drama: [
+        {
+          titulo: "Forrest Gump",
+          enlace:  "https://www.youtube.com/watch?v=bLvqoHBptjg"
+        },
+        {
+          titulo: "El Padrino",
+          enlace: "https://www.youtube.com/watch?v=UaVTIH8mujA"
+        }
+      ],
+      accion: [
+        {
+          titulo: "John Wick",
+          enlace: "https://www.youtube.com/watch?v=C0BMx-qxsP4"
+        },
+        {
+          titulo: "Mad Max: Fury Road",
+          enlace: "https://www.youtube.com/watch?v=hEJnMQG9ev8"
+        }
+      ],
+      comedia: [
+        {
+          titulo: "Supercool",
+          enlace: "https://www.youtube.com/watch?v=4eaZ_48ZYog"
+        },
+        {
+          titulo: "¿Qué pasó ayer?",
+          enlace: "https://www.youtube.com/watch?v=tcdUhdOlz9M"
+        }
+      ]
+    };
+
+    function mostrarPeliculas() {
+      const genero = document.getElementById('genero').value;
+      const contenedor = document.getElementById('listaPeliculas');
+      contenedor.innerHTML = '';
+
+      if (peliculas[genero]) {
+        peliculas[genero].forEach(pelicula => {
+          const div = document.createElement('div');
+          div.classList.add('pelicula');
+          div.innerHTML = `
+            <p><strong>${pelicula.titulo}</strong></p>
+            <a href="${pelicula.enlace}" target="_blank">Ver tráiler</a>
+          `;
+          contenedor.appendChild(div);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
+
+
